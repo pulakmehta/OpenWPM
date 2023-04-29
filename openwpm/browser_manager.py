@@ -10,6 +10,7 @@ import tempfile
 import threading
 import time
 import traceback
+import subprocess
 from pathlib import Path
 from queue import Empty as EmptyQueue
 from typing import TYPE_CHECKING, Any, Dict, Optional, Tuple, Type, Union
@@ -25,7 +26,7 @@ from .commands.profile_commands import dump_profile
 from .commands.types import BaseCommand, ShutdownSignal
 from .commands.utils.webdriver_utils import parse_neterror
 from .config import BrowserParamsInternal, ManagerParamsInternal
-from .deploy_browsers import deploy_firefox
+from .deploy_browsers import deploy_firefox, deploy_torbrowser
 from .errors import BrowserConfigError, BrowserCrashError, ProfileLoadError
 from .socket_interface import ClientSocket
 from .storage.storage_providers import TableName
@@ -713,12 +714,24 @@ class BrowserManager(Process):
 
         try:
             # Start Xvfb (if necessary), webdriver, and browser
-            driver, browser_profile_path, display = deploy_firefox.deploy_firefox(
-                self.status_queue,
-                self.browser_params,
-                self.manager_params,
-                self.crash_recovery,
-            )
+            if self.browser_params.browser.lower() == "firefox":
+                driver, browser_profile_path, display = deploy_firefox.deploy_firefox(
+                    self.status_queue,
+                    self.browser_params,
+                    self.manager_params,
+                    self.crash_recovery,
+                )
+            elif "torbrowser" in self.browser_params.browser.lower():
+                driver, browser_profile_path, display = deploy_torbrowser.deploy_torbrowser(
+                    self.status_queue,
+                    self.browser_params,
+                    self.manager_params,
+                    self.crash_recovery,
+                )
+            else:
+                # We should never get here. This should be caught in the config
+                # error checking.
+                raise RuntimeError("Unsupported Browser Selected.")
 
             extension_socket: Optional[ClientSocket] = None
 

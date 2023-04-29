@@ -13,8 +13,16 @@ from .types import BrowserId
 BOOL_TYPE_VALIDATION_LIST = [True, False]
 DISPLAY_MODE_VALIDATION_LIST = ["native", "headless", "xvfb"]
 SUPPORTED_BROWSER_LIST = [
-    "firefox"
+    "firefox",
+    # TFS: Add Tor.
+    "torbrowser"
 ]  # Using List instead of a str type to future proof the logic as OpenWPM may add support for more browsers in future
+# TFS: Add security slider settings
+SUPPORTED_SECURITY_SLIDER_LEVELS = [
+    "standard",
+    "safer",
+    "safest"
+]
 TP_COOKIES_OPTIONALS_LIST = ["always", "never", "from_visited"]
 LOG_EXTENSION_TYPE_LIST = [".log"]
 CONFIG_ERROR_STRING = (
@@ -103,6 +111,8 @@ class BrowserParams(DataClassJsonMixin):
     donottrack: bool = False
     tracking_protection: bool = False
     custom_params: Dict[Any, Any] = field(default_factory=lambda: {})
+    # TFS: Add a security slider level
+    slider_level: str = "standard"
 
 
 @dataclass
@@ -194,6 +204,15 @@ def validate_browser_params(browser_params: BrowserParams) -> None:
                     value=browser_params.browser,
                     value_list=SUPPORTED_BROWSER_LIST,
                     parameter_name="browser",
+                )
+            )
+
+        if browser_params.slider_level.lower() not in SUPPORTED_SECURITY_SLIDER_LEVELS:
+            raise ConfigError(
+                CONFIG_ERROR_STRING.format(
+                    value=browser_params.slider_level,
+                    value_list=SUPPORTED_SECURITY_SLIDER_LEVELS,
+                    parameter_name="slider_level",
                 )
             )
 

@@ -129,7 +129,7 @@ class TaskManager:
         thread.start()
 
         # Save crawl config information to database
-        openwpm_v, browser_v = get_version()
+        openwpm_v, browser_v, tor_v = get_version()
         self.storage_controller_handle.save_configuration(
             manager_params, browser_params, openwpm_v, browser_v
         )

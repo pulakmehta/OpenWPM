@@ -1,0 +1,5 @@
+firefox.settings.services.mozilla.com:HSTS	1	19410	1708599630824,1,0,2
+cdn-fastly.torproject.org:HSTS	0	19410	1684839497307,1,0,2
+securedrop.org:HSTS	0	19410	1740135401481,1,1,2
+aus1.torproject.org:HSTS	0	19410	1692831493710,1,0,2
+cdn.torproject.org:HSTS	0	19410	1692831495340,1,0,2
