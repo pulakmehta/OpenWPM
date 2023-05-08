@@ -1,4 +1,7 @@
+import argparse
 from pathlib import Path
+
+import tranco
 
 from custom_command import LinkCountingCommand
 from openwpm.command_sequence import CommandSequence
@@ -7,15 +10,17 @@ from openwpm.config import BrowserParams, ManagerParams
 from openwpm.storage.sql_provider import SQLiteStorageProvider
 from openwpm.task_manager import TaskManager
 
+
 # The list of sites that we wish to crawl
 NUM_BROWSERS = 1
 sites = [
     "http://go.com",
 ]
 
+
 # Loads the default ManagerParams
 # and NUM_BROWSERS copies of the default BrowserParams
-
+NUM_BROWSERS = 2
 manager_params = ManagerParams(num_browsers=NUM_BROWSERS)
 browser_params = [BrowserParams(display_mode="headless") for _ in range(NUM_BROWSERS)]
 
