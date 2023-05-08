@@ -1,0 +1,40 @@
+# Tor state file last generated on 2023-02-22 11:10:54 local time
+# Other times below are in UTC
+# You *do not* need to edit this file.
+
+CircuitBuildTimeBin 625 1
+CircuitBuildTimeBin 705 1
+CircuitBuildTimeBin 735 1
+CircuitBuildTimeBin 755 1
+CircuitBuildTimeBin 1265 1
+CircuitBuildTimeBin 4025 1
+CircuitBuildTimeBin 4365 1
+CircuitBuildTimeBin 5005 1
+CircuitBuildTimeBin 5055 1
+CircuitBuildTimeBin 5885 1
+CircuitBuildTimeBin 6165 1
+CircuitBuildTimeBin 6315 1
+Dormant 0
+Guard in=default rsa_id=1F61192CBD66254C3AB2062FB6F5326D6BCE3ECD nickname=AboveAndBeyond sampled_on=2023-02-14T10:53:26 sampled_idx=0 sampled_by=0.4.7.13 listed=1 confirmed_on=2023-02-16T13:59:25 confirmed_idx=2 pb_use_attempts=3.000000 pb_use_successes=3.000000 pb_circ_attempts=7.000000 pb_circ_successes=7.000000 pb_successful_circuits_closed=7.000000
+Guard in=default rsa_id=BA6E064596B86AF9F55F0603A82C90E958E86E7A nickname=twoandtwoone sampled_on=2023-02-15T16:04:18 sampled_idx=1 sampled_by=0.4.7.13 listed=1 confirmed_on=2023-02-20T19:30:39 confirmed_idx=0 pb_use_attempts=2.000000 pb_use_successes=2.000000 pb_circ_attempts=5.000000 pb_circ_successes=5.000000 pb_successful_circuits_closed=5.000000
+Guard in=default rsa_id=ED480200B1BD7C74552D006264DC2B1F9D8BE679 nickname=MihamaChiyo sampled_on=2023-02-13T03:23:03 sampled_idx=2 sampled_by=0.4.7.13 listed=1 confirmed_on=2023-02-13T08:55:54 confirmed_idx=1
+Guard in=default rsa_id=F9E7C3420C761D8253D131EFEFC9EC8CC4F8FB28 nickname=bauruine sampled_on=2023-02-13T09:13:24 sampled_idx=3 sampled_by=0.4.7.13 listed=1
+Guard in=default rsa_id=51F0D13D91A60F0B4540F157DB68B70C7FDB1439 nickname=b0rked01 sampled_on=2023-02-20T15:18:20 sampled_idx=4 sampled_by=0.4.7.13 listed=1
+Guard in=default rsa_id=FA751944A6DADBB99496E5E06A8EA1C14D5A5C2D nickname=fortherepublic sampled_on=2023-02-14T06:29:06 sampled_idx=5 sampled_by=0.4.7.13 listed=1
+Guard in=default rsa_id=17074B4FFB0A0815C355638EEBA37B87FA12FFB7 nickname=Unnamed sampled_on=2023-02-18T14:23:01 sampled_idx=6 sampled_by=0.4.7.13 listed=1
+Guard in=default rsa_id=F9910CE2A3E9D467FCDD9D5228695BA1827B010D nickname=recodex sampled_on=2023-02-16T14:45:23 sampled_idx=7 sampled_by=0.4.7.13 listed=1
+Guard in=default rsa_id=4A4EFB3E9347189B6AB9453844692CCA1F46A4C7 nickname=netzwerkspaB sampled_on=2023-02-19T08:23:56 sampled_idx=8 sampled_by=0.4.7.13 listed=1
+Guard in=default rsa_id=DEC397A6EFD3D2E1B3CC49BD4F1D229F806DF940 nickname=thehourglass sampled_on=2023-02-15T23:26:01 sampled_idx=9 sampled_by=0.4.7.13 listed=1
+Guard in=default rsa_id=00DA4A3852EA5EF6841B8B4372DB0EFD3AB0BE92 nickname=ChumBucket sampled_on=2023-02-18T12:54:16 sampled_idx=10 sampled_by=0.4.7.13 listed=1
+Guard in=default rsa_id=67A54EDB7DADDBBC1E8A07F1EF82364BDAA896B7 nickname=fuckfbi sampled_on=2023-02-21T05:30:27 sampled_idx=11 sampled_by=0.4.7.13 listed=1
+Guard in=default rsa_id=4FE32D5E9961DCF50B3CA3EC2ED41CCCB3FAE015 nickname=Reeses3 sampled_on=2023-02-16T22:30:08 sampled_idx=12 sampled_by=0.4.7.13 listed=1
+Guard in=default rsa_id=BA13324719485DC3B5FF258C21603287F1AFFD06 nickname=freeassange sampled_on=2023-02-15T00:21:14 sampled_idx=13 sampled_by=0.4.7.13 listed=1
+Guard in=default rsa_id=E384748293FC4429E2B427360DB4F9D4C3D619D1 nickname=PXArelay02 sampled_on=2023-02-18T06:45:31 sampled_idx=14 sampled_by=0.4.7.13 listed=1
+Guard in=default rsa_id=B4C39AD461B21AA48DB4FB371B001D91A3043C0C nickname=luraleen2 sampled_on=2023-02-17T23:05:22 sampled_idx=15 sampled_by=0.4.7.13 listed=1
+Guard in=default rsa_id=6CBA90E31188A65E2B6AC1EE8412E8DE571ECAD6 nickname=spicyavocado sampled_on=2023-02-19T16:00:43 sampled_idx=16 sampled_by=0.4.7.13 listed=1
+Guard in=default rsa_id=B16BFE5C5DD2F76EAB72E3FD41A062706912B0F2 nickname=leSablier sampled_on=2023-02-19T17:57:11 sampled_idx=17 sampled_by=0.4.7.13 listed=1
+Guard in=default rsa_id=D2ADD68BA9F735031893CB8A58548375E831B45B nickname=ForPrivacyNET sampled_on=2023-02-14T05:03:22 sampled_idx=18 sampled_by=0.4.7.13 listed=1
+Guard in=default rsa_id=DCAA176F75B04287131C6D78B7CFDDAC6F2691D9 nickname=SweRaspiTor3 sampled_on=2023-02-19T08:30:15 sampled_idx=19 sampled_by=0.4.7.13 listed=1
+LastWritten 2023-02-22 11:10:54
+TorVersion Tor 0.4.7.13 (git-7c1601fb6edd780f)
+TotalBuildTimes 12

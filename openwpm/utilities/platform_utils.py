@@ -65,6 +65,78 @@ def get_firefox_binary_path():
         )
     return firefox_binary_path
 
+## TFS: Add Tor Binary path
+def get_torbrowser_binary_path():
+    """
+    If ../../firefox-bin/firefox-bin or os.environ["TORBROWSER_BINARY"] exists,
+    return it. Else, throw a RuntimeError.
+    """
+    if "TORBROWSER_BINARY" in os.environ:
+        torbrowser_binary_path = os.environ["TORBROWSER_BINARY"]
+        if not os.path.isfile(torbrowser_binary_path):
+            raise RuntimeError(
+                "No file found at the path specified in "
+                "environment variable `TORBROWSER_BINARY`."
+                "Current `TORBROWSER_BINARY`: %s" % torbrowser_binary_path
+            )
+        return torbrowser_binary_path
+
+    root_dir = os.path.dirname(__file__) + "/../.."
+    if platform == "darwin":
+        torbrowser_binary_path = os.path.abspath(
+            root_dir + "/Nightly.app/Contents/MacOS/Tor/firefox-bin"
+        )
+    else:
+        torbrowser_binary_path = os.path.abspath(root_dir
+            + "/Tor/tor-browser/Browser/firefox")
+
+    if not os.path.isfile(torbrowser_binary_path):
+        raise RuntimeError(
+            "The `Tor/tor-browser/Browser/firefox` binary is not found "
+            "in the root of the  OpenWPM directory (did you run the "
+            "install script (`install.sh`)?). Alternatively, you can "
+            "specify a binary location using the OS environment variable"
+            " TORBROWSER_BINARY."
+        )
+    return torbrowser_binary_path
+
+## TFS: Add Tor Binary path.
+def get_torbrowser_profile_path(slider_setting):
+    """
+    If Tor/tor-browser/Browser/TorBrowser/Data/Browser or
+    os.environ["TORBROWSER_PROFILE"] exists, return it. Else, throw a
+    RuntimeError.
+    """
+    if "TORBROWSER_PROFILE" in os.environ:
+        torbrowser_binary_path = os.environ["TORBROWSER_PROFILE"]
+        total_path = f'{torbrowser_binary_path}/{slider_setting}'
+        if not os.path.isdir(total_path):
+            raise RuntimeError(
+                "No file found at the path specified in "
+                "environment variable `TORBROWSER_PROFILE`."
+                f"Current `TORBROWSER_PROFILE`: {torbrowser_binary_path}.\n"
+                f"Current slider setting: {slider_setting}."
+            )
+        return torbrowser_profile_path + f'/{slider_setting}'
+
+    root_dir = os.path.dirname(__file__) + "/../.."
+    # TFS: TODO: Modify the code below.
+    if platform == "darwin":
+        torbrowser_binary_path = os.path.abspath(
+            root_dir + "/Nightly.app/Contents/MacOS/Tor/firefox-bin"
+        )
+    else:
+        torbrowser_profile_path = os.path.abspath(root_dir
+            + f"/Tor/tor-browser/Browser/TorBrowser/Data/Browser/{slider_setting}")
+
+    if not os.path.isdir(torbrowser_profile_path):
+        raise RuntimeError(
+            f"The `Tor/tor-browser/Browser/TorBrowser/Data/Browser/{slider_level}`"
+            " directory is not found in the root of the  OpenWPM directory. "
+            "You can specify a profile location using the OS environment "
+            "variable TORBROWSER_PROFILE."
+        )
+    return torbrowser_profile_path
 
 def get_version():
     """Return OpenWPM version tag/current commit and Firefox version"""
@@ -84,7 +156,20 @@ def get_version():
         raise RuntimeError("Firefox not found. " " Did you run `./install.sh`?") from e
 
     ff = firefox.split()[-1]
-    return openwpm, ff
+    # TFS: return Tor Browser version as well.
+    #return openwpm, ff
+    torbrowser_dir_path = os.path.dirname(get_torbrowser_binary_path())
+    torbrowser_version_path = os.path.join(torbrowser_dir_path, 'tbb_version.json')
+    try:
+        with open(torbrowser_version_path, 'r') as json_file:
+            tor = "Tor Browser Version" + json.loads(json_file.read())['version']
+    except FileNotFoundError:
+        raise RuntimeError("Tor Browser version info not found.") from e
+    except PermissionError:
+        raise RuntimeError("Tor Browser version info cannot be read.") from e
+    except json.JSONDecodeError:
+        raise RuntimeError("Tor Browser version info not formatted properly.") from e
+    return openwpm, ff, tor
 
 
 def get_configuration_string(manager_params, browser_params, versions):

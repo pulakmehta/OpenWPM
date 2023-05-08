@@ -10,28 +10,19 @@ from openwpm.config import BrowserParams, ManagerParams
 from openwpm.storage.sql_provider import SQLiteStorageProvider
 from openwpm.task_manager import TaskManager
 
-parser = argparse.ArgumentParser()
-parser.add_argument("--tranco", action="store_true", default=False),
-args = parser.parse_args()
 
-if args.tranco:
-    # Load the latest tranco list. See https://tranco-list.eu/
-    print("Loading tranco top sites list...")
-    t = tranco.Tranco(cache=True, cache_dir=".tranco")
-    latest_list = t.list()
-    sites = ["http://" + x for x in latest_list.top(10)]
-else:
-    sites = [
-        "http://www.example.com",
-        "http://www.princeton.edu",
-        "http://citp.princeton.edu/",
-    ]
+# The list of sites that we wish to crawl
+NUM_BROWSERS = 1
+sites = [
+    "http://go.com",
+]
+
 
 # Loads the default ManagerParams
 # and NUM_BROWSERS copies of the default BrowserParams
 NUM_BROWSERS = 2
 manager_params = ManagerParams(num_browsers=NUM_BROWSERS)
-browser_params = [BrowserParams(display_mode="native") for _ in range(NUM_BROWSERS)]
+browser_params = [BrowserParams(display_mode="headless") for _ in range(NUM_BROWSERS)]
 
 # Update browser configuration (use this for per-browser settings)
 for browser_param in browser_params:
@@ -47,6 +38,9 @@ for browser_param in browser_params:
     browser_param.callstack_instrument = True
     # Record DNS resolution
     browser_param.dns_instrument = True
+    # TFS: Turn this to Tor and add security slider setting
+    browser_param.browser = "firefox"
+    browser_param.slider_level = "standard"
 
 # Update TaskManager configuration (use this for crawl-wide settings)
 manager_params.data_directory = Path("./datadir/")
@@ -62,7 +56,7 @@ manager_params.log_path = Path("./datadir/openwpm.log")
 with TaskManager(
     manager_params,
     browser_params,
-    SQLiteStorageProvider(Path("./datadir/crawl-data.sqlite")),
+    SQLiteStorageProvider(Path("./datadir/tor-crawl-data.sqlite")),
     None,
 ) as manager:
     # Visits the sites
